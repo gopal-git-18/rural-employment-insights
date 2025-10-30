@@ -23,7 +23,7 @@ public class MgnregaApplication {
     @Bean
     CommandLineRunner loadData(DistrictRepository districtRepo, PerformanceRepository perfRepo) {
         return args -> {
-            // ✅ Step 1: Create sample districts (for Rajasthan)
+            //  Step 1: Create sample districts (for Rajasthan)
             List<District> districts = Arrays.asList(
                     new District(1L, "Jaipur", "Rajasthan", 26.9124, 75.7873),
                     new District(2L, "Udaipur", "Rajasthan", 24.5854, 73.7125),
@@ -52,7 +52,7 @@ public class MgnregaApplication {
                 }
             }
 
-            System.out.println("✅ Sample data loaded: " + districts.size() + " districts, multiple months per year.");
+            System.out.println("Sample data loaded: " + districts.size() + " districts, multiple months per year.");
         };
     }
 }

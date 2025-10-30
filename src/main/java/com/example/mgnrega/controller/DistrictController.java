@@ -4,6 +4,7 @@ import com.example.mgnrega.model.District;
 import com.example.mgnrega.model.MonthlyPerformance;
 import com.example.mgnrega.repository.DistrictRepository;
 import com.example.mgnrega.repository.PerformanceRepository;
+import com.example.mgnrega.service.DistrictService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,22 +21,35 @@ public class DistrictController {
     @Autowired
     private PerformanceRepository perfRepo;
 
-    // ✅ Get all districts
-    @GetMapping
-    public List<District> getAllDistricts() {
-        return districtRepo.findAll();
-    }
     @Autowired
-    private com.example.mgnrega.service.DistrictService districtService;
+    private DistrictService districtService;
 
-    // ✅ Get performance data for a district
+    // Temporary: Hardcoded minimal list for demo
+    @GetMapping
+    public List<String> getDistricts() {
+        return List.of(
+                "Bangalore Urban",
+                "Bangalore Rural",
+                "Mysore",
+                "Mangalore"
+        );
+    }
+
+    // Get performance data for a district
     @GetMapping("/{id}/performance")
     public List<MonthlyPerformance> getPerformance(@PathVariable Long id) {
         return perfRepo.findByDistrictId(id);
     }
-    // ✅ Auto-detect nearest district using coordinates
+
+    // Auto-detect nearest district using coordinates
     @GetMapping("/nearest")
     public District getNearestDistrict(@RequestParam double lat, @RequestParam double lng) {
         return districtService.findNearestDistrict(lat, lng);
     }
+
+    // Optional: If you want full list from DB (can be slow)
+    // @GetMapping("/all")
+    // public List<District> getAllDistricts() {
+    //     return districtRepo.findAll();
+    // }
 }

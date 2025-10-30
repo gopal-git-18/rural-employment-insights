@@ -19,7 +19,7 @@ public class DistrictService {
         return districtRepository.findAll();
     }
 
-    // ✅ Find nearest district to a given lat/lng using Haversine formula
+    // Find nearest district to a given lat/lng using Haversine formula
     public District findNearestDistrict(double lat, double lng) {
         List<District> districts = districtRepository.findAll();
         return districts.stream()
